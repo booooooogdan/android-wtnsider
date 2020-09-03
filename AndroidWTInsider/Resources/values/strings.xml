@@ -3,4 +3,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+  <string name="alertDialogConnectMessage">Turn on the Internet to continue</string>
+  <string name="alertDialogConnectRetry">Retry</string>
+  <string name="alertDialogConnectTitle">No internet connection</string>
+  <string name="alertDialogLoadingMessage">This may take up to a 15 sec</string>
+  <string name="alertDialogLoadingTitle">Loading vehicle data</string>
 </resources>
