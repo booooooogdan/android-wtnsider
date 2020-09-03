@@ -4,12 +4,12 @@ using System.Xml;
 using System.Xml.Serialization;
 using Android.App;
 using Android.Content;
-using Plugin.Connectivity;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Widget;
 using System.Reactive.Linq;
 using Akavache;
+using Plugin.Connectivity;
 using Android.Views;
 using Android.Content.PM;
 using System;
@@ -39,6 +39,8 @@ namespace AndroidWTInsider
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.StartupLayout);
             context = Application.Context;
+            Syncfusion.Licensing.SyncfusionLicenseProvider
+               .RegisterLicense("MzExNTgyQDMxMzgyZTMyMmUzMENBYUR1b2xmRHhjZ2tKblVPWlI5Vm9rYTRSSDlwRDhvalQrbUMzaGhqZXM9");
 
             debugTextView = FindViewById<TextView>(Resource.Id.textViewdebug); //show debug info
 
@@ -94,7 +96,7 @@ namespace AndroidWTInsider
                 RunOnUiThread(() => {
                     debugTextView.SetText("check cache", TextView.BufferType.Normal);
                 });
-                Registrations.Start("WTInsiderAkavacheCache");
+                Registrations.Start("WTIAkavacheCache");
                 var arrayOfPlanesCached = await BlobCache.UserAccount.GetObject<ArrayOfPlanes>("cachedArrayOfPlanes");
                 var arrayOfTanksCached = await BlobCache.UserAccount.GetObject<ArrayOfPlanes>("cachedArrayOfTanks");
                 var arrayOfHelisCached = await BlobCache.UserAccount.GetObject<ArrayOfPlanes>("cachedArrayOfHelis");
