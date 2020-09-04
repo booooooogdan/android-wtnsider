@@ -14,10 +14,12 @@ using Android.Views;
 using Android.Content.PM;
 using System;
 using AndroidWTInsider.XmlHandler;
+using Com.Syncfusion.Sfbusyindicator;
+using Android.Graphics;
 
 namespace AndroidWTInsider
 {
-    [Activity(Label = "WT Insider", Theme = "@style/AppTheme", MainLauncher = true, ScreenOrientation=ScreenOrientation.Portrait)]
+    [Activity(Label = "WT Insider", Theme = "@style/AppTheme", MainLauncher = true, ScreenOrientation=ScreenOrientation.Landscape)]
     public class Startup:AppCompatActivity
     {
         #region Variables
@@ -197,13 +199,24 @@ namespace AndroidWTInsider
         /// </summary>
         private void AlertDialogWhenDataLoading()
         {
+            string title = context.Resources.GetString(Resource.String.alertDialogLoadingTitle);
+
             LayoutInflater layoutInflater = LayoutInflater.From(this);
             View mview = layoutInflater.Inflate(Resource.Layout._alertDialogLoading, null);
             Android.App.AlertDialog.Builder alertDialogBuilder = new Android.App.AlertDialog.Builder(this);
             alertDialogBuilder.SetView(mview);
             Android.App.AlertDialog alertDialogAndroid = alertDialogBuilder.Create();
             alertDialogAndroid.SetCancelable(false);
-            alertDialogAndroid.Show();
+
+            SfBusyIndicator busyIndicator = mview.FindViewById<SfBusyIndicator>(Resource.Id.sfBusyIndicator);
+            busyIndicator.AnimationType = Com.Syncfusion.Sfbusyindicator.Enums.AnimationTypes.DoubleCircle;
+            busyIndicator.Title = title;
+            busyIndicator.TextColor = Color.DarkGray;
+            busyIndicator.ViewBoxHeight = 60;
+            busyIndicator.ViewBoxWidth = 60;
+            busyIndicator.IsBusy = true;
+
+            alertDialogAndroid.Show();           
         }
 
         /// <summary>

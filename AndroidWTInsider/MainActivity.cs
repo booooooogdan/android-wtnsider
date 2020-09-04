@@ -1,29 +1,28 @@
-﻿using Akavache;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
+using Android.Content.PM;
+using System.Threading.Tasks;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
+using AndroidWTInsider.Helpers;
 using AndroidWTInsider.XmlHandler;
 using Com.Syncfusion.Charts;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
 
 namespace AndroidWTInsider
 {
-    [Activity]
+    [Activity(ScreenOrientation = ScreenOrientation.Landscape)]
     public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         #region Initialization non View values
 
         Context context;
-        ArrayOfTanks arrayOfTanks;
-        double[] numbers;
         SfChart chart;
+        ChartsDataPoints chartsDataPoints;
         #endregion
 
         /// <summary>
@@ -36,45 +35,40 @@ namespace AndroidWTInsider
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
             context = Application.Context;
-            #endregion
-
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
+            #endregion
 
-            FillListFromCacheAsync().ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Load cached List of tanks
-        /// </summary>
-        private async Task FillListFromCacheAsync()
-        {
-            arrayOfTanks = await BlobCache.UserAccount.GetObject<ArrayOfTanks>("cachedArrayOfTanks");
+            chartsDataPoints = new ChartsDataPoints();
             ChartInitialization();
         }
 
+        /// <summary>
+        /// Iitialization syncfusion charts line
+        /// </summary>
         private void ChartInitialization()
         {
             chart = FindViewById<SfChart>(Resource.Id.sfChart1);
-            numbers = new double[] { 1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3, 4.7, 5.0, 5.3, 5.7, 6.0, 6.3, 6.7, 7.0, 7.3, 7.7, 8.0, 8.3, 8.7, 9.0, 9.3, 9.7, 10.0, 10.3, 10.7 };
-
-            chart.Title.Text = "Count of vehicle";
+            chart.Title.Text = context.Resources.GetString(Resource.String.countOfVehicle);
             chart.Title.TextSize = 15;
             chart.SetBackgroundColor(Color.White);
             chart.ColorModel.ColorPalette = ChartColorPalette.Natural;
 
+            //Trackball initialization
             ChartTrackballBehavior trackballBehavior = new ChartTrackballBehavior();
             trackballBehavior.ShowLabel = true;
             trackballBehavior.ShowLine = true;
             trackballBehavior.ActivationMode = ChartTrackballActivationMode.TouchMove;
             chart.Behaviors.Add(trackballBehavior);
 
+            //Chart legend initialization
             chart.Legend.Visibility = Visibility.Visible;
             chart.Legend.DockPosition = ChartDock.Bottom;
             chart.Legend.IconHeight = 14;
             chart.Legend.IconWidth = 14;
             chart.Legend.ToggleSeriesVisibility = true;
 
+            //Horizontal axis (X)
             CategoryAxis categoryaxis = new CategoryAxis();
             categoryaxis.LabelPlacement = LabelPlacement.BetweenTicks;
             categoryaxis.EdgeLabelsDrawingMode = EdgeLabelsDrawingMode.Shift;
@@ -84,6 +78,7 @@ namespace AndroidWTInsider
             categoryaxis.MajorTickStyle.TickSize = 10;
             chart.PrimaryAxis = categoryaxis;
 
+            //Vertical axis (Y)
             NumericalAxis numericalaxis = new NumericalAxis();
             numericalaxis.Minimum = 0;
             numericalaxis.Maximum = 15;
@@ -93,36 +88,38 @@ namespace AndroidWTInsider
             //numericalaxis.LabelStyle.LabelFormat = "'$'#";
             chart.SecondaryAxis = numericalaxis;
 
+            #region Nation init
+
             LineSeries lineUsa = new LineSeries();
-           lineUsa.ItemsSource = GetStackingLineUSA();
-           lineUsa.XBindingPath = "XValue";
-           lineUsa.YBindingPath = "YValue";
-           lineUsa.Label = "USA";
-           lineUsa.Color = Color.ParseColor("#64b5f6");
-           lineUsa.StrokeWidth = 2;
-           lineUsa.TooltipEnabled = true;
+            lineUsa.ItemsSource = chartsDataPoints.GetLineDataPoint("USA");
+            lineUsa.XBindingPath = "XValue";
+            lineUsa.YBindingPath = "YValue";
+            lineUsa.Label = "USA";
+            lineUsa.Color = Color.ParseColor("#64b5f6");
+            lineUsa.StrokeWidth = 2;
+            lineUsa.TooltipEnabled = true;
 
             LineSeries lineGermany = new LineSeries();
-           lineGermany.ItemsSource = GetStackingLineGermany();
-           lineGermany.XBindingPath = "XValue";
-           lineGermany.YBindingPath = "YValue";
-           lineGermany.Label = "Germany";
-           lineGermany.Visibility = Visibility.Gone;
-           lineGermany.Color = Color.ParseColor("#455a64");
-           lineGermany.StrokeWidth = 2;
-           lineGermany.TooltipEnabled = true;
+            lineGermany.ItemsSource = chartsDataPoints.GetLineDataPoint("Germany");
+            lineGermany.XBindingPath = "XValue";
+            lineGermany.YBindingPath = "YValue";
+            lineGermany.Label = "Germany";
+            lineGermany.Visibility = Visibility.Gone;
+            lineGermany.Color = Color.ParseColor("#455a64");
+            lineGermany.StrokeWidth = 2;
+            lineGermany.TooltipEnabled = true;
 
             LineSeries lineUSSR = new LineSeries();
-           lineUSSR.ItemsSource = GetStackingLineUSSR();
-           lineUSSR.XBindingPath = "XValue";
-           lineUSSR.YBindingPath = "YValue";
-           lineUSSR.Label = "USSR";
-           lineUSSR.Color = Color.ParseColor("#d50000");
-           lineUSSR.StrokeWidth = 2;
-           lineUSSR.TooltipEnabled = true;
+            lineUSSR.ItemsSource = chartsDataPoints.GetLineDataPoint("USSR");
+            lineUSSR.XBindingPath = "XValue";
+            lineUSSR.YBindingPath = "YValue";
+            lineUSSR.Label = "USSR";
+            lineUSSR.Color = Color.ParseColor("#d50000");
+            lineUSSR.StrokeWidth = 2;
+            lineUSSR.TooltipEnabled = true;
 
             LineSeries lineBritain = new LineSeries();
-            lineBritain.ItemsSource = GetStackingLineBritain();
+            lineBritain.ItemsSource = chartsDataPoints.GetLineDataPoint("Britain");
             lineBritain.XBindingPath = "XValue";
             lineBritain.YBindingPath = "YValue";
             lineBritain.Label = "Britain";
@@ -132,7 +129,7 @@ namespace AndroidWTInsider
             lineBritain.TooltipEnabled = true;
 
             LineSeries lineJapan = new LineSeries();
-            lineJapan.ItemsSource = GetStackingLineJapan();
+            lineJapan.ItemsSource = chartsDataPoints.GetLineDataPoint("Japan");
             lineJapan.XBindingPath = "XValue";
             lineJapan.YBindingPath = "YValue";
             lineJapan.Label = "Japan";
@@ -142,7 +139,7 @@ namespace AndroidWTInsider
             lineJapan.TooltipEnabled = true;
 
             LineSeries lineItaly = new LineSeries();
-            lineItaly.ItemsSource = GetStackingLineItaly();
+            lineItaly.ItemsSource = chartsDataPoints.GetLineDataPoint("Italy");
             lineItaly.XBindingPath = "XValue";
             lineItaly.YBindingPath = "YValue";
             lineItaly.Label = "Italy";
@@ -151,7 +148,7 @@ namespace AndroidWTInsider
             lineItaly.TooltipEnabled = true;
 
             LineSeries lineFrance = new LineSeries();
-            lineFrance.ItemsSource = GetStackingLineFrance();
+            lineFrance.ItemsSource = chartsDataPoints.GetLineDataPoint("France");
             lineFrance.XBindingPath = "XValue";
             lineFrance.YBindingPath = "YValue";
             lineFrance.Label = "France";
@@ -161,7 +158,7 @@ namespace AndroidWTInsider
             lineFrance.TooltipEnabled = true;
 
             LineSeries lineChina = new LineSeries();
-            lineChina.ItemsSource = GetStackingLineChina();
+            lineChina.ItemsSource = chartsDataPoints.GetLineDataPoint("China");
             lineChina.XBindingPath = "XValue";
             lineChina.YBindingPath = "YValue";
             lineChina.Label = "China";
@@ -171,7 +168,7 @@ namespace AndroidWTInsider
             lineChina.TooltipEnabled = true;
 
             LineSeries lineSweden = new LineSeries();
-            lineSweden.ItemsSource = GetStackingLineSweden();
+            lineSweden.ItemsSource = chartsDataPoints.GetLineDataPoint("Sweden");
             lineSweden.XBindingPath = "XValue";
             lineSweden.YBindingPath = "YValue";
             lineSweden.Label = "Sweden";
@@ -179,7 +176,9 @@ namespace AndroidWTInsider
             lineSweden.Color = Color.ParseColor("#ffeb3b");
             lineSweden.StrokeWidth = 2;
             lineSweden.TooltipEnabled = true;
+            #endregion
 
+            //Turn on animation drawing
             lineUsa.EnableAnimation = true;
             lineGermany.EnableAnimation = true;
             lineUSSR.EnableAnimation = true;
@@ -190,9 +189,10 @@ namespace AndroidWTInsider
             lineChina.EnableAnimation = true;
             lineSweden.EnableAnimation = true;
 
+            //Add line to chart
             chart.Series.Add(lineUsa);
             chart.Series.Add(lineGermany);
-            chart.Series.Add(lineUSSR); 
+            chart.Series.Add(lineUSSR);
             chart.Series.Add(lineBritain);
             chart.Series.Add(lineJapan);
             chart.Series.Add(lineItaly);
@@ -202,131 +202,30 @@ namespace AndroidWTInsider
 
         }
 
-
-        public List<DataPoint> GetStackingLineUSA()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "USA").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
-        public List<DataPoint> GetStackingLineGermany()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "Germany").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
-        public List<DataPoint> GetStackingLineUSSR()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "USSR").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
-        public List<DataPoint> GetStackingLineBritain()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "Britain").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
-        public List<DataPoint> GetStackingLineJapan()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "Japan").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
-        public List<DataPoint> GetStackingLineItaly()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "Italy").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
-        public List<DataPoint> GetStackingLineFrance()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "France").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
-        public List<DataPoint> GetStackingLineChina()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "China").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
-        public List<DataPoint> GetStackingLineSweden()
-        {
-            var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == "Sweden").ToList();
-            var datas = new List<DataPoint>();
-            foreach (double number in numbers)
-            {
-                var tanksCount = tanksAll.Where(x => x.BR == number).Count();
-                datas.Add(new DataPoint(number, tanksCount));
-            }
-            return datas;
-        }
-
+        /// <summary>
+        /// Menu navigation method
+        /// </summary>
+        /// <param name="item">Menu item</param>
+        /// <returns></returns>
         public bool OnNavigationItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
             {
-                case Resource.Id.navigation_home:
+                case Resource.Id.menu_plane:
                     //var intentStatistics = new Intent(this, typeof(StatisticsActivity));
                     //intentStatistics.AddFlags(ActivityFlags.NoAnimation);
                     //StartActivity(intentStatistics);
                     return true;
-                case Resource.Id.navigation_dashboard:
+                case Resource.Id.menu_tank:
                     return true;
-                case Resource.Id.navigation_notifications:
+                case Resource.Id.menu_heli:
+                    return true;
+                case Resource.Id.menu_ship:
+                    return true;
+                case Resource.Id.menu_feedback:
                     return true;
             }
             return false;
         }
     }
 }
-
