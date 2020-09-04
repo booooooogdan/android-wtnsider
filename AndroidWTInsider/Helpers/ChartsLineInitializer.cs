@@ -1,54 +1,15 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Content.PM;
-using System.Threading.Tasks;
 using Android.Graphics;
-using Android.OS;
-using Android.Support.Design.Widget;
-using Android.Support.V7.App;
-using Android.Views;
-using AndroidWTInsider.Helpers;
-using AndroidWTInsider.XmlHandler;
 using Com.Syncfusion.Charts;
-using System;
-using System.Collections.Generic;
 
-namespace AndroidWTInsider
+namespace AndroidWTInsider.Helpers
 {
-    [Activity(ScreenOrientation = ScreenOrientation.Landscape)]
-    public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    class ChartsLineInitializer
     {
-        #region Initialization non View values
-
-        Context context;
-        SfChart chart;
-        ChartsDataPoints chartsDataPoints;
-        #endregion
-
-        /// <summary>
-        /// Base Android OnCreate method. Entry point for app
-        /// </summary>
-        /// <param name="savedInstanceState"></param>
-        protected override void OnCreate(Bundle savedInstanceState)
+        public void ChartBinding(SfChart chart, ChartsDataPoints chartsDataPoints)
         {
-            #region Initialization required elements
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.activity_main);
-            context = Application.Context;
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            navigation.SetOnNavigationItemSelectedListener(this);
-            #endregion
-
-            chartsDataPoints = new ChartsDataPoints();
-            ChartInitialization();
-        }
-
-        /// <summary>
-        /// Iitialization syncfusion charts line
-        /// </summary>
-        private void ChartInitialization()
-        {
-            chart = FindViewById<SfChart>(Resource.Id.sfChart1);
+            Context context = Application.Context;
             chart.Title.Text = context.Resources.GetString(Resource.String.countOfVehicle);
             chart.Title.TextSize = 15;
             chart.SetBackgroundColor(Color.White);
@@ -87,8 +48,6 @@ namespace AndroidWTInsider
             numericalaxis.MajorTickStyle.TickSize = 0;
             //numericalaxis.LabelStyle.LabelFormat = "'$'#";
             chart.SecondaryAxis = numericalaxis;
-
-            #region Nation init
 
             LineSeries lineUsa = new LineSeries();
             lineUsa.ItemsSource = chartsDataPoints.GetLineDataPoint("USA");
@@ -143,6 +102,7 @@ namespace AndroidWTInsider
             lineItaly.XBindingPath = "XValue";
             lineItaly.YBindingPath = "YValue";
             lineItaly.Label = "Italy";
+            lineItaly.Visibility = Visibility.Gone;
             lineItaly.Color = Color.ParseColor("#7cb342");
             lineItaly.StrokeWidth = 2;
             lineItaly.TooltipEnabled = true;
@@ -176,7 +136,6 @@ namespace AndroidWTInsider
             lineSweden.Color = Color.ParseColor("#ffeb3b");
             lineSweden.StrokeWidth = 2;
             lineSweden.TooltipEnabled = true;
-            #endregion
 
             //Turn on animation drawing
             lineUsa.EnableAnimation = true;
@@ -199,33 +158,6 @@ namespace AndroidWTInsider
             chart.Series.Add(lineFrance);
             chart.Series.Add(lineChina);
             chart.Series.Add(lineSweden);
-
-        }
-
-        /// <summary>
-        /// Menu navigation method
-        /// </summary>
-        /// <param name="item">Menu item</param>
-        /// <returns></returns>
-        public bool OnNavigationItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.menu_plane:
-                    //var intentStatistics = new Intent(this, typeof(StatisticsActivity));
-                    //intentStatistics.AddFlags(ActivityFlags.NoAnimation);
-                    //StartActivity(intentStatistics);
-                    return true;
-                case Resource.Id.menu_tank:
-                    return true;
-                case Resource.Id.menu_heli:
-                    return true;
-                case Resource.Id.menu_ship:
-                    return true;
-                case Resource.Id.menu_feedback:
-                    return true;
-            }
-            return false;
         }
     }
 }

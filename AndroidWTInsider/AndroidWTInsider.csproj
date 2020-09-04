@@ -79,7 +79,8 @@
     <Compile Include="DataPoint.cs" />
     <Compile Include="Helpers\BRArray.cs" />
     <Compile Include="Helpers\ChartsDataPoints.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="Helpers\ChartsLineInitializer.cs" />
+    <Compile Include="TanksCount.cs" />
     <Compile Include="Models\Heli.cs" />
     <Compile Include="Models\Plane.cs" />
     <Compile Include="Models\Ship.cs" />
@@ -101,7 +102,7 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\activity_main.xml">
+    <AndroidResource Include="Resources\layout\TanksCount.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\colors.xml" />

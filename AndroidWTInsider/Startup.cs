@@ -224,7 +224,7 @@ namespace AndroidWTInsider
         /// </summary>
         private void MoveToNextActivity()
         {
-            var intent = new Intent(this, typeof(MainActivity));
+            var intent = new Intent(this, typeof(TanksCount));
             intent.AddFlags(ActivityFlags.NoAnimation);
             StartActivity(intent);
             Finish();
