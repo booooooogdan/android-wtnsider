@@ -6,12 +6,18 @@
     xmlns:p4="http://xamarin.com/mono/android/designer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBackground"
+    android:background="@android:color/white"
     android:theme="@style/AppTheme">
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/spinnerCount"/>
 
     <Com.Syncfusion.Charts.SfChart
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerCount"
         android:layout_above="@+id/navigation"
         android:id="@+id/sfChart1" />
 
@@ -24,6 +30,7 @@
         android:background="?android:attr/windowBackground"
         android:layout_alignParentBottom="true"
         app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="40dp"
         app:menu="@menu/navigation" />
 
 </RelativeLayout>

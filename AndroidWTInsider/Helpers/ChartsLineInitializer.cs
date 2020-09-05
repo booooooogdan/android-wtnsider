@@ -7,11 +7,8 @@ namespace AndroidWTInsider.Helpers
 {
     class ChartsLineInitializer
     {
-        public void ChartBinding(SfChart chart, ChartsDataPoints chartsDataPoints)
+        public void ChartLineBinding(SfChart chart, ChartsDataPoints chartsDataPoints)
         {
-            Context context = Application.Context;
-            chart.Title.Text = context.Resources.GetString(Resource.String.countOfVehicle);
-            chart.Title.TextSize = 15;
             chart.SetBackgroundColor(Color.White);
             chart.ColorModel.ColorPalette = ChartColorPalette.Natural;
 
@@ -40,14 +37,20 @@ namespace AndroidWTInsider.Helpers
             chart.PrimaryAxis = categoryaxis;
 
             //Vertical axis (Y)
+            MinMaxValue minMaxValue = new MinMaxValue();
+            double maximum = minMaxValue.MaximumYValue();
+            double minimum = minMaxValue.MinimumYValue();
+
             NumericalAxis numericalaxis = new NumericalAxis();
-            numericalaxis.Minimum = 0;
-            numericalaxis.Maximum = 15;
-            numericalaxis.Interval = 1;
+            numericalaxis.Minimum = minimum;
+            numericalaxis.Maximum = maximum;
+            numericalaxis.Interval = (maximum-minimum)/5;
             numericalaxis.LineStyle.StrokeWidth = 0;
             numericalaxis.MajorTickStyle.TickSize = 0;
             //numericalaxis.LabelStyle.LabelFormat = "'$'#";
             chart.SecondaryAxis = numericalaxis;
+
+            #region Nations
 
             LineSeries lineUsa = new LineSeries();
             lineUsa.ItemsSource = chartsDataPoints.GetLineDataPoint("USA");
@@ -136,6 +139,7 @@ namespace AndroidWTInsider.Helpers
             lineSweden.Color = Color.ParseColor("#ffeb3b");
             lineSweden.StrokeWidth = 2;
             lineSweden.TooltipEnabled = true;
+            #endregion
 
             //Turn on animation drawing
             lineUsa.EnableAnimation = true;

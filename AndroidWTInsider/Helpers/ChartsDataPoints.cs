@@ -7,21 +7,18 @@ using Akavache;
 using Android.App;
 using Android.Content;
 using AndroidWTInsider.XmlHandler;
+using AndroidWTInsider.DataArrays;
 
 namespace AndroidWTInsider.Helpers
 {
-    public class ChartsDataPoints
+    class ChartsDataPoints
     {
         Context context;
         ArrayOfTanks arrayOfTanks;
-        BRArray brArray;
-        double[] br;
 
         public ChartsDataPoints()
         {
             context = Application.Context;
-            brArray = new BRArray();
-            br = brArray.TanksBR();
             Task.Run(FillListFromCacheAsync).Wait();
         }
 
@@ -34,7 +31,7 @@ namespace AndroidWTInsider.Helpers
         {
             var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == nation).ToList();
             var datas = new List<DataPoint>();
-            foreach (double number in br)
+            foreach (double number in BRArray.TanksBR())
             {
                 var tanksCount = tanksAll.Where(x => x.BR == number).Count();
                 datas.Add(new DataPoint(number, tanksCount));

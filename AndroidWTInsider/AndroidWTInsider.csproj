@@ -75,11 +75,14 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChartData.cs" />
-    <Compile Include="DataPoint.cs" />
-    <Compile Include="Helpers\BRArray.cs" />
+    <Compile Include="Models\DataPoint.cs" />
+    <Compile Include="DataArrays\BRArray.cs" />
     <Compile Include="Helpers\ChartsDataPoints.cs" />
     <Compile Include="Helpers\ChartsLineInitializer.cs" />
+    <Compile Include="Helpers\MinMaxValue.cs" />
+    <Compile Include="DataArrays\NationArray.cs" />
+    <Compile Include="DataArrays\TanksTaskArray.cs" />
+    <Compile Include="TanksPenetration.cs" />
     <Compile Include="TanksCount.cs" />
     <Compile Include="Models\Heli.cs" />
     <Compile Include="Models\Plane.cs" />
@@ -169,6 +172,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\menu_tank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\TanksPenetration.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

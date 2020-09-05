@@ -13,7 +13,7 @@ using Com.Syncfusion.Charts;
 namespace AndroidWTInsider
 {
     [Activity(ScreenOrientation = ScreenOrientation.Landscape)]
-    public class TanksCount : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class TanksPenetration : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
 
         SfChart chartView;
@@ -55,7 +55,7 @@ namespace AndroidWTInsider
             spinner.SetSelection(0);
             switch (e.Position)
             {
-                case 0:
+                case 1:
                     var intentStatistics = new Intent(this, typeof(TanksPenetration));
                     intentStatistics.AddFlags(ActivityFlags.NoAnimation);
                     StartActivity(intentStatistics);
@@ -73,9 +73,9 @@ namespace AndroidWTInsider
             switch (item.ItemId)
             {
                 case Resource.Id.menu_plane:
-                    //    var intentStatistics = new Intent(this, typeof(TanksPenetration));
-                    //    intentStatistics.AddFlags(ActivityFlags.NoAnimation);
-                    //    StartActivity(intentStatistics);
+                    //var intentStatistics = new Intent(this, typeof(TanksPenetration));
+                    //intentStatistics.AddFlags(ActivityFlags.NoAnimation);
+                    //StartActivity(intentStatistics);
                     return true;
                 case Resource.Id.menu_tank:
                     return true;
