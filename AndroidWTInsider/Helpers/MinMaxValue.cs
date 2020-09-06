@@ -1,45 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using AndroidWTInsider.DataArrays;
 
 namespace AndroidWTInsider.Helpers
 {
     class MinMaxValue
     {
-        ChartsDataPoints chartsDataPoints;
-        List<DataPoint> dataPoints;
+        IDataGenerator chartsData;
+        List<DataPoint> dataPointsList;
 
-        public double MaximumYValue()
+        public double MaximumYValue(IDataGenerator chartsData, string chartTask)
         {
-            chartsDataPoints = new ChartsDataPoints();
             double max = 0;
             foreach (string nation in NationArray.Nations())
             {
-                dataPoints = chartsDataPoints.GetLineDataPoint(nation);
-                double probably = Convert.ToDouble(dataPoints.Max(x => x.YValue));
+                dataPointsList = chartsData.GetLineDataPoint(nation, chartTask);
+                double probably = Convert.ToDouble(dataPointsList.Max(x => x.YValue));
                 if (probably > max)
                     max = probably;
             }
             return max;
         }
 
-        public double MinimumYValue()
+        public double MinimumYValue(IDataGenerator chartsData, string chartTask)
         {
-            chartsDataPoints = new ChartsDataPoints();
-            double min = 1000000;
+            double min = double.MaxValue;
             foreach (string nation in NationArray.Nations())
             {
-                dataPoints = chartsDataPoints.GetLineDataPoint(nation);
-                double probably = Convert.ToDouble(dataPoints.Min(x => x.YValue));
+                dataPointsList = chartsData.GetLineDataPoint(nation, chartTask);
+                double probably = Convert.ToDouble(dataPointsList.Min(x => x.YValue));
                 if (probably < min)
                     min = probably;
             }

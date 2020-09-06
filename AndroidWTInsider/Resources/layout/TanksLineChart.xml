@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:id="@+id/spinnerCount"/>
+        android:id="@+id/spinnerTank"/>
 
     <Com.Syncfusion.Charts.SfChart
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerCount"
+        android:layout_below="@+id/spinnerTank"
         android:layout_above="@+id/navigation"
-        android:id="@+id/sfChart1" />
+        android:id="@+id/sfChartTank" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

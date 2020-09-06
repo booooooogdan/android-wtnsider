@@ -39,7 +39,7 @@ namespace AndroidWTInsider
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.StartupLayout);
+            SetContentView(Resource.Layout.Startup);
             context = Application.Context;
             Syncfusion.Licensing.SyncfusionLicenseProvider
                .RegisterLicense("MzExNTgyQDMxMzgyZTMyMmUzMENBYUR1b2xmRHhjZ2tKblVPWlI5Vm9rYTRSSDlwRDhvalQrbUMzaGhqZXM9");
@@ -224,7 +224,7 @@ namespace AndroidWTInsider
         /// </summary>
         private void MoveToNextActivity()
         {
-            var intent = new Intent(this, typeof(TanksCount));
+            var intent = new Intent(this, typeof(TanksLineChart));
             intent.AddFlags(ActivityFlags.NoAnimation);
             StartActivity(intent);
             Finish();

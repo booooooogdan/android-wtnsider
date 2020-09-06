@@ -13,12 +13,12 @@ using Com.Syncfusion.Charts;
 namespace AndroidWTInsider
 {
     [Activity(ScreenOrientation = ScreenOrientation.Landscape)]
-    public class TanksCount : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class TanksLineChart : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
 
         SfChart chartView;
         ChartsLineInitializer chartsLineInitializer;
-        ChartsDataPoints chartsData;
+        ChartsTankDataGenerator chartsData;
         Spinner spinner;
 
         /// <summary>
@@ -29,22 +29,21 @@ namespace AndroidWTInsider
         {
             #region Initialization required elements
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.TanksCount);
+            SetContentView(Resource.Layout.TanksLineChart);
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
             #endregion
 
-            chartView = FindViewById<SfChart>(Resource.Id.sfChart1);
             chartsLineInitializer = new ChartsLineInitializer();
-            chartsData = new ChartsDataPoints();
+            chartView = FindViewById<SfChart>(Resource.Id.sfChartTank);
+            chartsData = new ChartsTankDataGenerator();
 
             SpinnerInitialization();
-            chartsLineInitializer.ChartLineBinding(chartView, chartsData);
         }
 
         private void SpinnerInitialization()
         {
-            spinner = FindViewById<Spinner>(Resource.Id.spinnerCount);
+            spinner = FindViewById<Spinner>(Resource.Id.spinnerTank);
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, TanksTaskArray.TankTasks());
             spinner.Adapter = adapter;
             spinner.ItemSelected += Spinner_ItemSelected;
@@ -56,9 +55,28 @@ namespace AndroidWTInsider
             switch (e.Position)
             {
                 case 0:
-                    var intentStatistics = new Intent(this, typeof(TanksPenetration));
-                    intentStatistics.AddFlags(ActivityFlags.NoAnimation);
-                    StartActivity(intentStatistics);
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "count");
+                    spinner.SetSelection(0);
+                    break;
+                case 1:
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "repaircost");
+                    spinner.SetSelection(1);
+                    break;
+                case 2:
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "maxspeed");
+                    spinner.SetSelection(2);
+                    break;
+                case 3:
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "maxspeedatroad");
+                    spinner.SetSelection(3);
+                    break;
+                case 4:
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "reload");
+                    spinner.SetSelection(4);
+                    break;
+                case 5:
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "penetration");
+                    spinner.SetSelection(5);
                     break;
             }
         }
@@ -73,9 +91,9 @@ namespace AndroidWTInsider
             switch (item.ItemId)
             {
                 case Resource.Id.menu_plane:
-                    //    var intentStatistics = new Intent(this, typeof(TanksPenetration));
-                    //    intentStatistics.AddFlags(ActivityFlags.NoAnimation);
-                    //    StartActivity(intentStatistics);
+                    var intentPlane = new Intent(this, typeof(PlaneLineChart));
+                    intentPlane.AddFlags(ActivityFlags.NoAnimation);
+                    StartActivity(intentPlane);
                     return true;
                 case Resource.Id.menu_tank:
                     return true;
