@@ -3,7 +3,7 @@ using Com.Syncfusion.Charts;
 
 namespace AndroidWTInsider.Helpers
 {
-    class ChartsLineInitializer
+    class LineChartsInitializer
     {
         public void ChartLineInit(SfChart chartView, IDataGenerator chartsData, string chartTask)
         {

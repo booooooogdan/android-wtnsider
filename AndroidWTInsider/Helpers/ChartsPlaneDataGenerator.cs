@@ -77,10 +77,58 @@ namespace AndroidWTInsider.Helpers
                     }
                     break;
 
+                case "enginepower":
+                    foreach (double number in BRArray.PlanesBR())
+                    {
+                        var planesCount = planesAll.Where(x => x.BR == number).Max(x => x.EnginePower);
+                        datas.Add(new DataPoint(number, planesCount));
+                    }
+                    break;
+
+                case "weight":
+                    foreach (double number in BRArray.PlanesBR())
+                    {
+                        var planesCount = planesAll.Where(x => x.BR == number).Min(x => x.Weight);
+                        datas.Add(new DataPoint(number, planesCount));
+                    }
+                    break;
+
+                case "flutter":
+                    foreach (double number in BRArray.PlanesBR())
+                    {
+                        var planesCount = planesAll.Where(x => x.BR == number).Max(x => x.Flutter);
+                        datas.Add(new DataPoint(number, planesCount));
+                    }
+                    break;
+
+                case "optimalalitude":
+                    foreach (double number in BRArray.PlanesBR())
+                    {
+                        var planesCount = planesAll.Where(x => x.BR == number).Max(x => x.OptimalAlitude);
+                        datas.Add(new DataPoint(number, planesCount));
+                    }
+                    break;
+
+                case "bombload":
+                    foreach (double number in BRArray.PlanesBR())
+                    {
+                        var planesCount = planesAll.Where(x => x.BR == number).Max(x => x.BombLoad);
+                        datas.Add(new DataPoint(number, planesCount));
+                    }
+                    break;
+
                 case "burstmass":
                     foreach (double number in BRArray.PlanesBR())
                     {
                         var planesCount = planesAll.Where(x => x.BR == number).Max(x => x.BurstMass);
+                        datas.Add(new DataPoint(number, planesCount));
+                    }
+                    break;          
+                
+                case "firstflyyear":
+                    foreach (double number in BRArray.PlanesBR())
+                    {
+                        var planesCount = planesAll.Where(x => x.BR == number).Max(x => x.FirstFlyYear);
                         datas.Add(new DataPoint(number, planesCount));
                     }
                     break;

@@ -7,7 +7,6 @@ namespace AndroidWTInsider.Helpers
 {
     class MinMaxValue
     {
-        IDataGenerator chartsData;
         List<DataPoint> dataPointsList;
 
         public double MaximumYValue(IDataGenerator chartsData, string chartTask)

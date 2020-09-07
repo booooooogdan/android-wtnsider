@@ -75,17 +75,23 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataArrays\HelisTaskArray.cs" />
     <Compile Include="DataArrays\PlanesTaskArray.cs" />
+    <Compile Include="DataArrays\ShipsTaskArray.cs" />
+    <Compile Include="HelisLineChart.cs" />
+    <Compile Include="Helpers\ChartsHeliDataGenerator.cs" />
     <Compile Include="Helpers\ChartsPlaneDataGenerator.cs" />
+    <Compile Include="Helpers\ChartsShipDataGenerator.cs" />
     <Compile Include="Helpers\IDataGenerator.cs" />
     <Compile Include="Models\DataPoint.cs" />
     <Compile Include="DataArrays\BRArray.cs" />
     <Compile Include="Helpers\ChartsTankDataGenerator.cs" />
-    <Compile Include="Helpers\ChartsLineInitializer.cs" />
+    <Compile Include="Helpers\LineChartsInitializer.cs" />
     <Compile Include="Helpers\MinMaxValue.cs" />
     <Compile Include="DataArrays\NationArray.cs" />
     <Compile Include="DataArrays\TanksTaskArray.cs" />
-    <Compile Include="PlaneLineChart.cs" />
+    <Compile Include="PlanesLineChart.cs" />
+    <Compile Include="ShipsLineChart.cs" />
     <Compile Include="TanksLineChart.cs" />
     <Compile Include="Models\Heli.cs" />
     <Compile Include="Models\Plane.cs" />
@@ -178,6 +184,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\PlanesLineChart.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\HelisLineChart.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ShipsLineChart.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

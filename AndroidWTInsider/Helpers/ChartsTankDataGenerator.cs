@@ -8,7 +8,7 @@ using AndroidWTInsider.DataArrays;
 
 namespace AndroidWTInsider.Helpers
 {
-    class ChartsTankDataGenerator: IDataGenerator
+    class ChartsTankDataGenerator : IDataGenerator
     {
         ArrayOfTanks arrayOfTanks;
 
@@ -61,10 +61,25 @@ namespace AndroidWTInsider.Helpers
                     }
                     break;
 
-                case "reload":
+                case "maxspeedreverse":
                     foreach (double number in BRArray.TanksBR())
                     {
-                        var tanksCount = tanksAll.Where(x => x.BR == number).Min(x => x.ReloadTime);
+                        var tanksCount = tanksAll.Where(x => x.BR == number).Max(x => x.MaxReverseSpeed);
+                        datas.Add(new DataPoint(number, tanksCount));
+                    }
+                    break;
+                case "enginepower":
+                    foreach (double number in BRArray.TanksBR())
+                    {
+                        var tanksCount = tanksAll.Where(x => x.BR == number).Max(x => x.EnginePower);
+                        datas.Add(new DataPoint(number, tanksCount));
+                    }
+                    break;
+
+                case "weight":
+                    foreach (double number in BRArray.TanksBR())
+                    {
+                        var tanksCount = tanksAll.Where(x => x.BR == number).Min(x => x.Weight);
                         datas.Add(new DataPoint(number, tanksCount));
                     }
                     break;
@@ -73,6 +88,46 @@ namespace AndroidWTInsider.Helpers
                     foreach (double number in BRArray.TanksBR())
                     {
                         var tanksCount = tanksAll.Where(x => x.BR == number).Max(x => x.Penetration);
+                        datas.Add(new DataPoint(number, tanksCount));
+                    }
+                    break;
+
+                case "reload":
+                    foreach (double number in BRArray.TanksBR())
+                    {
+                        var tanksCount = tanksAll.Where(x => x.BR == number).Min(x => x.ReloadTime);
+                        datas.Add(new DataPoint(number, tanksCount));
+                    }
+                    break;
+
+                case "turretarmor":
+                    foreach (double number in BRArray.TanksBR())
+                    {
+                        var tanksCount = tanksAll.Where(x => x.BR == number).Max(x => x.ReducedArmorFrontTurret);
+                        datas.Add(new DataPoint(number, tanksCount));
+                    }
+                    break;
+
+                case "toparmor":
+                    foreach (double number in BRArray.TanksBR())
+                    {
+                        var tanksCount = tanksAll.Where(x => x.BR == number).Max(x => x.ReducedArmorTopSheet);
+                        datas.Add(new DataPoint(number, tanksCount));
+                    }
+                    break;           
+                
+                case "bottomarmor":
+                    foreach (double number in BRArray.TanksBR())
+                    {
+                        var tanksCount = tanksAll.Where(x => x.BR == number).Max(x => x.ReducedArmorBottomSheet);
+                        datas.Add(new DataPoint(number, tanksCount));
+                    }
+                    break;
+
+                case "firstrideyear":
+                    foreach (double number in BRArray.TanksBR())
+                    {
+                        var tanksCount = tanksAll.Where(x => x.BR == number).Max(x => x.FirstRideYear);
                         datas.Add(new DataPoint(number, tanksCount));
                     }
                     break;

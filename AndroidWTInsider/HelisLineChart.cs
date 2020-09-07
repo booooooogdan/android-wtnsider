@@ -12,12 +12,11 @@ using Com.Syncfusion.Charts;
 namespace AndroidWTInsider
 {
     [Activity(ScreenOrientation = ScreenOrientation.Landscape)]
-    public class PlaneLineChart : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class HelisLineChart : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
-
         SfChart chartView;
-        ChartsLineInitializer chartsLineInitializer;
-        ChartsPlaneDataGenerator chartsData;
+        LineChartsInitializer chartsLineInitializer;
+        ChartsHeliDataGenerator chartsData;
         Spinner spinner;
 
         /// <summary>
@@ -28,22 +27,22 @@ namespace AndroidWTInsider
         {
             #region Initialization required elements
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.PlanesLineChart);
+            SetContentView(Resource.Layout.HelisLineChart);
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
             #endregion
 
-            chartsLineInitializer = new ChartsLineInitializer();
-            chartView = FindViewById<SfChart>(Resource.Id.sfChartPlane);
-            chartsData = new ChartsPlaneDataGenerator();
+            chartsLineInitializer = new LineChartsInitializer();
+            chartView = FindViewById<SfChart>(Resource.Id.sfChartHeli);
+            chartsData = new ChartsHeliDataGenerator();
 
             SpinnerInitialization();
         }
 
         private void SpinnerInitialization()
         {
-            spinner = FindViewById<Spinner>(Resource.Id.spinnerPlane);
-            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, PlanesTaskArray.PlaneTasks());
+            spinner = FindViewById<Spinner>(Resource.Id.spinnerHeli);
+            var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, HelisTaskArray.HeliTasks());
             spinner.Adapter = adapter;
             spinner.ItemSelected += Spinner_ItemSelected;
         }
@@ -66,20 +65,28 @@ namespace AndroidWTInsider
                     spinner.SetSelection(2);
                     break;
                 case 3:
-                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "maxspeedat5000m");
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "climbto1000");
                     spinner.SetSelection(3);
                     break;
                 case 4:
-                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "climb");
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "weight");
                     spinner.SetSelection(4);
                     break;
                 case 5:
-                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "turntime");
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "agmcount");
                     spinner.SetSelection(5);
                     break;
                 case 6:
-                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "burstmass");
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "agmrange");
                     spinner.SetSelection(6);
+                    break;
+                case 7:
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "asmcount");
+                    spinner.SetSelection(7);
+                    break;
+                case 8:
+                    chartsLineInitializer.ChartLineInit(chartView, chartsData, "firstflyyear");
+                    spinner.SetSelection(8);
                     break;
             }
         }
@@ -94,7 +101,7 @@ namespace AndroidWTInsider
             switch (item.ItemId)
             {
                 case Resource.Id.menu_plane:
-                    //    var intentStatistics = new Intent(this, typeof(PlanesPenetration));
+                    //    var intentStatistics = new Intent(this, typeof(HelisPenetration));
                     //    intentStatistics.AddFlags(ActivityFlags.NoAnimation);
                     //    StartActivity(intentStatistics);
                     return true;
