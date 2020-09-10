@@ -6,6 +6,10 @@ namespace AndroidWTInsider.DataArrays
 {
     public class HelisTaskArray
     {
+        /// <summary>
+        /// Static localized list of helicopters taskk
+        /// </summary>
+        /// <returns>List of helicopters task</returns>
         public static List<string> HeliTasks()
         {
             Context context = Application.Context;

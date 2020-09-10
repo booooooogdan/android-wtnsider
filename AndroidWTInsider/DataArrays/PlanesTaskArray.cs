@@ -6,6 +6,10 @@ namespace AndroidWTInsider.DataArrays
 {
     public class PlanesTaskArray
     {
+        /// <summary>
+        /// Static localized list of planes taskk
+        /// </summary>
+        /// <returns>List of planes task</returns>
         public static List<string> PlaneTask()
         {
             Context context = Application.Context;

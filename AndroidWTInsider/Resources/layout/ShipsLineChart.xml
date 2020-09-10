@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:p4="http://xamarin.com/mono/android/designer"
@@ -11,8 +12,17 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:minHeight="60dp"
         android:id="@+id/spinnerShip"/>
+            <com.google.android.gms.ads.AdView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/adsShip"
+        android:id="@+id/adsShip"
+        android:layout_toRightOf="@+id/spinnerShip"
+     />
 
     <Com.Syncfusion.Charts.SfChart
         android:layout_width="wrap_content"

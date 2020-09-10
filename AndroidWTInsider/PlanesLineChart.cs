@@ -35,36 +35,49 @@ namespace AndroidWTInsider
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PlanesLineChart);
             context = Application.Context;
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            navigation.SetOnNavigationItemSelectedListener(this);
-            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_plane);
-            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#039BE5")));
-            #endregion
-
-            #region Ads initializer
-            MobileAds.Initialize(context);
-            var adView = FindViewById<AdView>(Resource.Id.adsPlane);
-            //adView.LoadAd(new AdRequest.Builder().Build());
-            var requestbuilder = new AdRequest.Builder().AddTestDevice("46CCAB8BBCE5B5FFA79C22BEB98029AC");
-            adView.LoadAd(requestbuilder.Build());
             #endregion
 
             chartsLineInitializer = new LineChartsInitializer();
             chartView = FindViewById<SfChart>(Resource.Id.sfChartPlane);
             chartsData = new ChartsPlaneDataGenerator();
 
-            SpinnerInitialization();
+            AdsInitialize();
+            SpinnerInitialize();
+            BottomMenuInitialize();
+        }
+
+        /// <summary>
+        /// AdMob banner initialize
+        /// </summary>
+        private void AdsInitialize()
+        {
+            MobileAds.Initialize(context);
+            var adView = FindViewById<AdView>(Resource.Id.adsPlane);
+            //adView.LoadAd(new AdRequest.Builder().Build());
+            var requestbuilder = new AdRequest.Builder().AddTestDevice("46CCAB8BBCE5B5FFA79C22BEB98029AC");
+            adView.LoadAd(requestbuilder.Build());
         }
 
         /// <summary>
         /// Set adapter for spinner menu
         /// </summary>
-        private void SpinnerInitialization()
+        private void SpinnerInitialize()
         {
             spinner = FindViewById<Spinner>(Resource.Id.spinnerPlane);
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, PlanesTaskArray.PlaneTask());
             spinner.Adapter = adapter;
             spinner.ItemSelected += Spinner_ItemSelected;
+        }
+
+        /// <summary>
+        /// Highlight selected menu item
+        /// </summary>
+        private void BottomMenuInitialize()
+        {
+            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+            navigation.SetOnNavigationItemSelectedListener(this);
+            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_plane);
+            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#039BE5")));
         }
 
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)

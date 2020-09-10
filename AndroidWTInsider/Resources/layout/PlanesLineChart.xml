@@ -12,24 +12,26 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:minHeight="60dp"
         android:id="@+id/spinnerPlane"/>
-
-    <Com.Syncfusion.Charts.SfChart
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerPlane"
-        android:layout_above="@+id/adsPlane"
-        android:id="@+id/sfChartPlane" />
-
-    <com.google.android.gms.ads.AdView
+        <com.google.android.gms.ads.AdView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/adsPlane"
         android:id="@+id/adsPlane"
-        android:layout_above="@+id/navigation"
+        android:layout_toRightOf="@+id/spinnerPlane"
      />
+
+    <Com.Syncfusion.Charts.SfChart
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerPlane"
+        android:layout_above="@+id/navigation"
+        android:id="@+id/sfChartPlane" />
+
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="wrap_content"

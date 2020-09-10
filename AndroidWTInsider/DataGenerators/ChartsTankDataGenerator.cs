@@ -17,11 +17,21 @@ namespace AndroidWTInsider.Helpers
             Task.Run(FillListFromCacheAsync).Wait();
         }
 
+        /// <summary>
+        /// Read data from cache and put to array value
+        /// </summary>
+        /// <returns>Array of values</returns>
         public async Task FillListFromCacheAsync()
         {
             arrayOfTanks = await BlobCache.UserAccount.GetObject<ArrayOfTanks>("cachedArrayOfTanks");
         }
 
+        /// <summary>
+        /// Generate data for charts line
+        /// </summary>
+        /// <param name="nation">Selected nation</param>
+        /// <param name="task">Selected task</param>
+        /// <returns>Data point list</returns>
         public List<DataPoint> GetLineDataPoint(string nation, string task)
         {
             var tanksAll = arrayOfTanks.TanksListApi.Where(x => x.Nation == nation).ToList();

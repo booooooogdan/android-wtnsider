@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
 using Android.Graphics;
@@ -7,6 +8,7 @@ using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
+using Android.Gms.Ads;
 using Android.Widget;
 using AndroidWTInsider.DataArrays;
 using AndroidWTInsider.Helpers;
@@ -21,6 +23,7 @@ namespace AndroidWTInsider
         LineChartsInitializer chartsLineInitializer;
         ChartsShipDataGenerator chartsData;
         Spinner spinner;
+        Context context;
 
         /// <summary>
         /// Base Android OnCreate method. Entry point for app
@@ -31,25 +34,50 @@ namespace AndroidWTInsider
             #region Initialization required elements
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ShipsLineChart);
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            navigation.SetOnNavigationItemSelectedListener(this);
-            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_ship);
-            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#00ACC1")));
+            context = Application.Context;
             #endregion
 
             chartsLineInitializer = new LineChartsInitializer();
             chartView = FindViewById<SfChart>(Resource.Id.sfChartShip);
             chartsData = new ChartsShipDataGenerator();
 
-            SpinnerInitialization();
+            AdsInitialize();
+            SpinnerInitialize();
+            BottomMenuInitialize();
         }
 
-        private void SpinnerInitialization()
+        /// <summary>
+        /// AdMob banner initialize
+        /// </summary>
+        private void AdsInitialize()
+        {
+            MobileAds.Initialize(context);
+            var adView = FindViewById<AdView>(Resource.Id.adsShip);
+            //adView.LoadAd(new AdRequest.Builder().Build());
+            var requestbuilder = new AdRequest.Builder().AddTestDevice("46CCAB8BBCE5B5FFA79C22BEB98029AC");
+            adView.LoadAd(requestbuilder.Build());
+        }
+
+        /// <summary>
+        /// Set adapter for spinner menu
+        /// </summary>
+        private void SpinnerInitialize()
         {
             spinner = FindViewById<Spinner>(Resource.Id.spinnerShip);
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, ShipsTaskArray.ShipTasks());
             spinner.Adapter = adapter;
             spinner.ItemSelected += Spinner_ItemSelected;
+        }
+
+        /// <summary>
+        /// Highlight selected menu item
+        /// </summary>
+        private void BottomMenuInitialize()
+        {
+            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+            navigation.SetOnNavigationItemSelectedListener(this);
+            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_ship);
+            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#00ACC1")));
         }
 
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)

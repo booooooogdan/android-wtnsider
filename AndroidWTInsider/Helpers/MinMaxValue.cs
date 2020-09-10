@@ -9,6 +9,12 @@ namespace AndroidWTInsider.Helpers
     {
         List<DataPoint> dataPointsList;
 
+        /// <summary>
+        /// Find maximum value for charts
+        /// </summary>
+        /// <param name="chartsData">Data provider</param>
+        /// <param name="chartTask">Case of task</param>
+        /// <returns>Max value from List</returns>
         public double MaximumYValue(IDataGenerator chartsData, string chartTask)
         {
             double max = 0;
@@ -22,6 +28,12 @@ namespace AndroidWTInsider.Helpers
             return max;
         }
 
+        /// <summary>
+        /// Find minimum value for charts
+        /// </summary>
+        /// <param name="chartsData">Data provider</param>
+        /// <param name="chartTask">Case of task</param>
+        /// <returns>Min value from List</returns>
         public double MinimumYValue(IDataGenerator chartsData, string chartTask)
         {
             double min = double.MaxValue;

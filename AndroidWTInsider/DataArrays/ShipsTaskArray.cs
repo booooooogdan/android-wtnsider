@@ -6,6 +6,10 @@ namespace AndroidWTInsider.DataArrays
 {
     public class ShipsTaskArray
     {
+        /// <summary>
+        /// Static localized list of ships taskk
+        /// </summary>
+        /// <returns>List of ships task</returns>
         public static List<string> ShipTasks()
         {
             Context context = Application.Context;

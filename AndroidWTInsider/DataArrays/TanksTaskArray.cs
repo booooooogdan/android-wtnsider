@@ -6,6 +6,10 @@ namespace AndroidWTInsider.DataArrays
 {
     public static class TanksTaskArray
     {
+        /// <summary>
+        /// Static localized list of tanks taskk
+        /// </summary>
+        /// <returns>List of tanks task</returns>
         public static List<string> TankTasks()
         {
             Context context = Application.Context;

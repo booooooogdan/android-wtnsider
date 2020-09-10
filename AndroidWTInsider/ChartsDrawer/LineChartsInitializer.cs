@@ -9,6 +9,12 @@ namespace AndroidWTInsider.Helpers
     {
         Context context = Application.Context;
 
+        /// <summary>
+        ///  Draw chart lines. Call from activity
+        /// </summary>
+        /// <param name="chartView">View from activity xml</param>
+        /// <param name="chartsData">Values for drawing charts lines</param>
+        /// <param name="chartTask">Task to draw</param>
         public void ChartLineInit(SfChart chartView, IDataGenerator chartsData, string chartTask)
         {
             chartView.Series.Clear();

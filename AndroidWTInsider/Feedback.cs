@@ -32,29 +32,20 @@ namespace AndroidWTInsider
             #region Initialization required elements
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Feedback);
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            navigation.SetOnNavigationItemSelectedListener(this);
-            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_feedback);
-            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#8E24AA")));
             context = Application.Context;
             #endregion
 
-            #region Ads initializer
-            //MobileAds.Initialize(context);
-            //var adView = FindViewById<AdView>(Resource.Id.adViewFeedback);
-            //adView.LoadAd(new AdRequest.Builder().Build());
-            //var requestbuilder = new AdRequest.Builder().AddTestDevice("46CCAB8BBCE5B5FFA79C22BEB98029AC");
-            //adView.LoadAd(requestbuilder.Build());
-            #endregion
-
+            BottomMenuInitialize();
             BindingInterfaceElementsToCode();
+
             buttonSend.Click += ButtonSend_Click;
             buttonReddit.Click += ButtonReddit_Click;
             buttonVK.Click += ButtonVK_Click;
             ratingBar.RatingBarChange += RatingBar_RatingBarChange;
             buttonRefWT.Click += ButtonRefWT_Click;
             buttonRefWoT.Click += ButtonRefWoT_Click;
-            buttonRefVersus.Click += ButtonRefVersus_Click; ;
+            buttonRefVersus.Click += ButtonRefVersus_Click; 
+
         }
 
         private void ButtonSend_Click(object sender, EventArgs e)
@@ -101,6 +92,17 @@ namespace AndroidWTInsider
         {
             StartActivity(new Intent(Intent.ActionView, Android.Net.Uri
               .Parse("https://play.google.com/store/apps/details?id=com.wave.wtversus")));
+        }
+
+        /// <summary>
+        /// Highlight selected menu item
+        /// </summary>
+        private void BottomMenuInitialize()
+        {
+            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+            navigation.SetOnNavigationItemSelectedListener(this);
+            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_feedback);
+            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#8E24AA")));
         }
 
         /// <summary>

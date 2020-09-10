@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
+using Android.Gms.Ads;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.Design.Internal;
@@ -22,6 +23,7 @@ namespace AndroidWTInsider
         LineChartsInitializer chartsLineInitializer;
         ChartsTankDataGenerator chartsData;
         Spinner spinner;
+        Context context;
 
         /// <summary>
         /// Base Android OnCreate method. Entry point for app
@@ -32,25 +34,50 @@ namespace AndroidWTInsider
             #region Initialization required elements
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.TanksLineChart);
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            navigation.SetOnNavigationItemSelectedListener(this);
-            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_tank);
-            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#43A047")));
+            context = Application.Context;
             #endregion
 
             chartsLineInitializer = new LineChartsInitializer();
             chartView = FindViewById<SfChart>(Resource.Id.sfChartTank);
             chartsData = new ChartsTankDataGenerator();
 
-            SpinnerInitialization();
+            AdsInitialize();
+            SpinnerInitialize();
+            BottomMenuInitialize();
         }
 
-        private void SpinnerInitialization()
+        /// <summary>
+        /// AdMob banner initialize
+        /// </summary>
+        private void AdsInitialize()
+        {
+            MobileAds.Initialize(context);
+            var adView = FindViewById<AdView>(Resource.Id.adsTank);
+            //adView.LoadAd(new AdRequest.Builder().Build());
+            var requestbuilder = new AdRequest.Builder().AddTestDevice("46CCAB8BBCE5B5FFA79C22BEB98029AC");
+            adView.LoadAd(requestbuilder.Build());
+        }
+
+        /// <summary>
+        /// Set adapter for spinner menu
+        /// </summary>
+        private void SpinnerInitialize()
         {
             spinner = FindViewById<Spinner>(Resource.Id.spinnerTank);
             var adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, TanksTaskArray.TankTasks());
             spinner.Adapter = adapter;
             spinner.ItemSelected += Spinner_ItemSelected;
+        }
+
+        /// <summary>
+        /// Highlight selected menu item
+        /// </summary>
+        private void BottomMenuInitialize()
+        {
+            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+            navigation.SetOnNavigationItemSelectedListener(this);
+            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_tank);
+            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#43A047")));
         }
 
         private void Spinner_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
@@ -112,7 +139,5 @@ namespace AndroidWTInsider
                     break;
             }
         }
-
-
     }
 }
