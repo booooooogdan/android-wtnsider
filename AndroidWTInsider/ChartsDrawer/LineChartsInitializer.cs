@@ -1,10 +1,14 @@
-﻿using Android.Graphics;
+﻿using Android.App;
+using Android.Content;
+using Android.Graphics;
 using Com.Syncfusion.Charts;
 
 namespace AndroidWTInsider.Helpers
 {
     class LineChartsInitializer
     {
+        Context context = Application.Context;
+
         public void ChartLineInit(SfChart chartView, IDataGenerator chartsData, string chartTask)
         {
             chartView.Series.Clear();
@@ -55,7 +59,7 @@ namespace AndroidWTInsider.Helpers
             lineUsa.ItemsSource = chartsData.GetLineDataPoint("USA", chartTask);
             lineUsa.XBindingPath = "XValue";
             lineUsa.YBindingPath = "YValue";
-            lineUsa.Label = "USA";
+            lineUsa.Label = context.Resources.GetString(Resource.String.nationUSA) ;
             lineUsa.Color = Color.ParseColor("#64b5f6");
             lineUsa.StrokeWidth = 2;
             lineUsa.DataMarker.ShowMarker = true;
@@ -67,7 +71,7 @@ namespace AndroidWTInsider.Helpers
             lineGermany.ItemsSource = chartsData.GetLineDataPoint("Germany", chartTask);
             lineGermany.XBindingPath = "XValue";
             lineGermany.YBindingPath = "YValue";
-            lineGermany.Label = "Germany";
+            lineGermany.Label = context.Resources.GetString(Resource.String.nationGermany);
             lineGermany.Visibility = Visibility.Gone;
             lineGermany.Color = Color.ParseColor("#455a64");
             lineGermany.StrokeWidth = 2;
@@ -80,7 +84,7 @@ namespace AndroidWTInsider.Helpers
             lineUSSR.ItemsSource = chartsData.GetLineDataPoint("USSR", chartTask);
             lineUSSR.XBindingPath = "XValue";
             lineUSSR.YBindingPath = "YValue";
-            lineUSSR.Label = "USSR";
+            lineUSSR.Label = context.Resources.GetString(Resource.String.nationUSSR);
             lineUSSR.Color = Color.ParseColor("#d50000");
             lineUSSR.StrokeWidth = 2;
             lineUSSR.DataMarker.ShowMarker = true;
@@ -92,7 +96,7 @@ namespace AndroidWTInsider.Helpers
             lineBritain.ItemsSource = chartsData.GetLineDataPoint("Britain", chartTask);
             lineBritain.XBindingPath = "XValue";
             lineBritain.YBindingPath = "YValue";
-            lineBritain.Label = "Britain";
+            lineBritain.Label = context.Resources.GetString(Resource.String.nationBritain);
             lineBritain.Visibility = Visibility.Gone;
             lineBritain.Color = Color.ParseColor("#8e24aa");
             lineBritain.StrokeWidth = 2;
@@ -105,7 +109,7 @@ namespace AndroidWTInsider.Helpers
             lineJapan.ItemsSource = chartsData.GetLineDataPoint("Japan", chartTask);
             lineJapan.XBindingPath = "XValue";
             lineJapan.YBindingPath = "YValue";
-            lineJapan.Label = "Japan";
+            lineJapan.Label = context.Resources.GetString(Resource.String.nationJapan);
             lineJapan.Visibility = Visibility.Gone;
             lineJapan.Color = Color.ParseColor("#f06292");
             lineJapan.StrokeWidth = 2;
@@ -118,7 +122,7 @@ namespace AndroidWTInsider.Helpers
             lineItaly.ItemsSource = chartsData.GetLineDataPoint("Italy", chartTask);
             lineItaly.XBindingPath = "XValue";
             lineItaly.YBindingPath = "YValue";
-            lineItaly.Label = "Italy";
+            lineItaly.Label = context.Resources.GetString(Resource.String.nationItaly);
             lineItaly.Visibility = Visibility.Gone;
             lineItaly.Color = Color.ParseColor("#7cb342");
             lineItaly.StrokeWidth = 2;
@@ -131,7 +135,7 @@ namespace AndroidWTInsider.Helpers
             lineFrance.ItemsSource = chartsData.GetLineDataPoint("France", chartTask);
             lineFrance.XBindingPath = "XValue";
             lineFrance.YBindingPath = "YValue";
-            lineFrance.Label = "France";
+            lineFrance.Label = context.Resources.GetString(Resource.String.nationFrance);
             lineFrance.Visibility = Visibility.Gone;
             lineFrance.Color = Color.ParseColor("#3f51b5");
             lineFrance.StrokeWidth = 2;
@@ -144,7 +148,7 @@ namespace AndroidWTInsider.Helpers
             lineChina.ItemsSource = chartsData.GetLineDataPoint("China", chartTask);
             lineChina.XBindingPath = "XValue";
             lineChina.YBindingPath = "YValue";
-            lineChina.Label = "China";
+            lineChina.Label = context.Resources.GetString(Resource.String.nationChina);
             lineChina.Visibility = Visibility.Gone;
             lineChina.Color = Color.ParseColor("#f57c00");
             lineChina.StrokeWidth = 2;
@@ -157,7 +161,7 @@ namespace AndroidWTInsider.Helpers
             lineSweden.ItemsSource = chartsData.GetLineDataPoint("Sweden", chartTask);
             lineSweden.XBindingPath = "XValue";
             lineSweden.YBindingPath = "YValue";
-            lineSweden.Label = "Sweden";
+            lineSweden.Label = context.Resources.GetString(Resource.String.nationSweden);
             lineSweden.Visibility = Visibility.Gone;
             lineSweden.Color = Color.ParseColor("#ffeb3b");
             lineSweden.StrokeWidth = 2;

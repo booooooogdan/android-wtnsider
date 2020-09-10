@@ -1,13 +1,32 @@
-﻿using System;
+﻿using Android.App;
+using Android.Content;
+using System.Collections.Generic;
 
 namespace AndroidWTInsider.DataArrays
 {
     public class PlanesTaskArray
     {
-        public static string[] PlaneTasks() => new string[] { "Count of planes", "Max repair cost"
-            , "Max speed at sea level", "Max speed at 5000 m", "Min climb time to 5000 m"
-            , "Min turn time", "Max engine power", "Min take-off weight"
-            , "Max speed of destruction", "Max optimal altitude","Max bomb payload"
-            , "Max burst maxx", "First fly year" };
+        public static List<string> PlaneTask()
+        {
+            Context context = Application.Context;
+
+            List<string> planeTasks = new List<string>
+            {
+                context.Resources.GetString(Resource.String.taskCountOfPlanes),
+                context.Resources.GetString(Resource.String.taskMaxRepairCost),
+                context.Resources.GetString(Resource.String.taskMaxSpeedAtSeaLevel),
+                context.Resources.GetString(Resource.String.taskMaxSpeedAt5000m),
+                context.Resources.GetString(Resource.String.taskClimb),
+                context.Resources.GetString(Resource.String.taskTurnTime),
+                context.Resources.GetString(Resource.String.taskEnginePower),
+                context.Resources.GetString(Resource.String.taskWeight),
+                context.Resources.GetString(Resource.String.taskFlutter),
+                context.Resources.GetString(Resource.String.taskOptimalAltitude),
+                context.Resources.GetString(Resource.String.taskPayload),
+                context.Resources.GetString(Resource.String.taskBurstTime),
+                context.Resources.GetString(Resource.String.taskFirstFly)
+            };
+            return planeTasks;
+        }
     }
 }

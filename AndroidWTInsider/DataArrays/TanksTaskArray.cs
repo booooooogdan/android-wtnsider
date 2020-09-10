@@ -1,13 +1,32 @@
-﻿using System;
+﻿using Android.App;
+using Android.Content;
+using System.Collections.Generic;
 
 namespace AndroidWTInsider.DataArrays
 {
     public static class TanksTaskArray
     {
-        public static string[] TankTasks() => new string[] { "Count of tanks", "Max repair cost"
-            , "Max speed at terrain", "Max speed at road", "Max reverse speed"
-            , "Max engine power", "Min weight", "Max penetration", "Min reload time"  
-            , "Max turret front armor", "Max front upper plate armor"
-            , "Max front bottom plate armor" , "First ride year" };
+        public static List<string> TankTasks()
+        {
+            Context context = Application.Context;
+
+            List<string> tankTasks = new List<string>
+            {
+                context.Resources.GetString(Resource.String.taskCountOfTanks),
+                context.Resources.GetString(Resource.String.taskMaxRepairCost),
+                context.Resources.GetString(Resource.String.taskMaxSpeedTerrain),
+                context.Resources.GetString(Resource.String.taskMaxSpeedRoad),
+                context.Resources.GetString(Resource.String.taskReverse),
+                context.Resources.GetString(Resource.String.taskEnginePower),
+                context.Resources.GetString(Resource.String.taskWeight),
+                context.Resources.GetString(Resource.String.taskPenetration),
+                context.Resources.GetString(Resource.String.taskMinReload),
+                context.Resources.GetString(Resource.String.taskTurretArmor),
+                context.Resources.GetString(Resource.String.taskUpperArmor),
+                context.Resources.GetString(Resource.String.taskLowerArmor),
+                context.Resources.GetString(Resource.String.taskFirstRide)
+            };
+            return tankTasks;
+        }
     }
 }

@@ -1,12 +1,28 @@
-﻿using System;
+﻿using Android.App;
+using Android.Content;
+using System.Collections.Generic;
 
 namespace AndroidWTInsider.DataArrays
 {
     public class HelisTaskArray
     {
-        public static string[] HeliTasks() => new string[] { "Count of helicopters", "Max repair cost"
-            , "Max speed at sea level", "Min climb time to 1000 m", "Min take-off weight"
-            , "Max ATGM count" , "Max ATGM range","Max unguided missile count"
-            , "First fly year"};
+        public static List<string> HeliTasks()
+        {
+            Context context = Application.Context;
+
+            List<string> heliTasks = new List<string>
+            {
+                context.Resources.GetString(Resource.String.taskCountOfHelis),
+                context.Resources.GetString(Resource.String.taskMaxRepairCost),
+                context.Resources.GetString(Resource.String.taskMaxSpeedAtSeaLevel),
+                context.Resources.GetString(Resource.String.taskClimb1000),
+                context.Resources.GetString(Resource.String.taskWeight),
+                context.Resources.GetString(Resource.String.taskATGMCount),
+                context.Resources.GetString(Resource.String.taskATGMRange),
+                context.Resources.GetString(Resource.String.taskASMCount),
+                context.Resources.GetString(Resource.String.taskFirstFly),
+            };
+            return heliTasks;
+        }
     }
 }

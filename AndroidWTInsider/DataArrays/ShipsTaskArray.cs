@@ -1,13 +1,34 @@
-﻿using System;
+﻿using Android.App;
+using Android.Content;
+using System.Collections.Generic;
 
 namespace AndroidWTInsider.DataArrays
 {
     public class ShipsTaskArray
     {
-        public static string[] ShipTasks() => new string[] { "Count of helicopters", "Max repair cost"
-            , "Max main caliber size", "Min main caliner reload", "Max torpedo count"
-            , "Max torpedo speed" , "Max torpedo TNT", "Max speed" , "Min bracking time"
-            , "Min turn 360 time", "Max tower armor", "Max hull armor", "Max crew count"
-            , "Max displacement","Launched year"};
+        public static List<string> ShipTasks()
+        {
+            Context context = Application.Context;
+
+            List<string> shipTasks = new List<string>
+            {
+                context.Resources.GetString(Resource.String.taskCountOfShips),
+                context.Resources.GetString(Resource.String.taskMaxRepairCost),
+                context.Resources.GetString(Resource.String.taskMcSize),
+                context.Resources.GetString(Resource.String.taskMCReload),
+                context.Resources.GetString(Resource.String.taskTorpedoCount),
+                context.Resources.GetString(Resource.String.taskTorpedoSpeed),
+                context.Resources.GetString(Resource.String.taskTorpedoTNT),
+                context.Resources.GetString(Resource.String.taskMaxSpeed),
+                context.Resources.GetString(Resource.String.taskBracking),          
+                context.Resources.GetString(Resource.String.taskTurn360ship),
+                context.Resources.GetString(Resource.String.taskTowerArmorShip),
+                context.Resources.GetString(Resource.String.taskHullArmor),
+                context.Resources.GetString(Resource.String.taskCrewCount),
+                context.Resources.GetString(Resource.String.taskDisplacement),
+                context.Resources.GetString(Resource.String.taskLaunchedYear),
+            };
+            return shipTasks;
+        }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
+using Android.Content.Res;
+using Android.Graphics;
 using Android.OS;
+using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
@@ -12,7 +15,7 @@ using Com.Syncfusion.Charts;
 namespace AndroidWTInsider
 {
     [Activity(ScreenOrientation = ScreenOrientation.Landscape)]
-    public class HelisLineChart : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class HelisLineChart : BottomNavigation, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         SfChart chartView;
         LineChartsInitializer chartsLineInitializer;
@@ -30,6 +33,8 @@ namespace AndroidWTInsider
             SetContentView(Resource.Layout.HelisLineChart);
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
+            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_heli);
+            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#FFB300")));
             #endregion
 
             chartsLineInitializer = new LineChartsInitializer();
@@ -89,32 +94,6 @@ namespace AndroidWTInsider
                     spinner.SetSelection(8);
                     break;
             }
-        }
-
-        /// <summary>
-        /// Menu navigation method
-        /// </summary>
-        /// <param name="item">Menu item</param>
-        /// <returns></returns>
-        public bool OnNavigationItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.menu_plane:
-                    //    var intentStatistics = new Intent(this, typeof(HelisPenetration));
-                    //    intentStatistics.AddFlags(ActivityFlags.NoAnimation);
-                    //    StartActivity(intentStatistics);
-                    return true;
-                case Resource.Id.menu_tank:
-                    return true;
-                case Resource.Id.menu_heli:
-                    return true;
-                case Resource.Id.menu_ship:
-                    return true;
-                case Resource.Id.menu_feedback:
-                    return true;
-            }
-            return false;
         }
     }
 }

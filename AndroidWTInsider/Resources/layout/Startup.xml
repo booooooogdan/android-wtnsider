@@ -10,7 +10,7 @@
         android:id="@+id/textViewdebug"
         android:textColor="#ffbdbdbd" />
     <ImageView
-        android:src="@drawable/Icon"
+        android:src="@drawable/IconTransp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="Logo"

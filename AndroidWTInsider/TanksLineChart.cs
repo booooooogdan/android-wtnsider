@@ -1,7 +1,10 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Content.Res;
+using Android.Graphics;
 using Android.OS;
+using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
@@ -13,9 +16,8 @@ using Com.Syncfusion.Charts;
 namespace AndroidWTInsider
 {
     [Activity(ScreenOrientation = ScreenOrientation.Landscape)]
-    public class TanksLineChart : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class TanksLineChart : BottomNavigation, BottomNavigationView.IOnNavigationItemSelectedListener
     {
-
         SfChart chartView;
         LineChartsInitializer chartsLineInitializer;
         ChartsTankDataGenerator chartsData;
@@ -32,6 +34,8 @@ namespace AndroidWTInsider
             SetContentView(Resource.Layout.TanksLineChart);
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
+            var coloredIcon = navigation.FindViewById<BottomNavigationItemView>(Resource.Id.menu_tank);
+            coloredIcon.SetIconTintList(ColorStateList.ValueOf(Color.ParseColor("#43A047")));
             #endregion
 
             chartsLineInitializer = new LineChartsInitializer();
@@ -109,39 +113,6 @@ namespace AndroidWTInsider
             }
         }
 
-        /// <summary>
-        /// Menu navigation method
-        /// </summary>
-        /// <param name="item">Menu item</param>
-        /// <returns></returns>
-        public bool OnNavigationItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.menu_plane:
-                    var intentPlane = new Intent(this, typeof(PlanesLineChart));
-                    intentPlane.AddFlags(ActivityFlags.NoAnimation);
-                    StartActivity(intentPlane);
-                    return true;
-                case Resource.Id.menu_tank:
-                    var intentTank = new Intent(this, typeof(TanksLineChart));
-                    intentTank.AddFlags(ActivityFlags.NoAnimation);
-                    StartActivity(intentTank);
-                    return true;
-                case Resource.Id.menu_heli:
-                    var intentHeli = new Intent(this, typeof(HelisLineChart));
-                    intentHeli.AddFlags(ActivityFlags.NoAnimation);
-                    StartActivity(intentHeli);
-                    return true;
-                case Resource.Id.menu_ship:
-                    var intentShip = new Intent(this, typeof(ShipsLineChart));
-                    intentShip.AddFlags(ActivityFlags.NoAnimation);
-                    StartActivity(intentShip);
-                    return true;
-                case Resource.Id.menu_feedback:
-                    return true;
-            }
-            return false;
-        }
+
     }
 }
