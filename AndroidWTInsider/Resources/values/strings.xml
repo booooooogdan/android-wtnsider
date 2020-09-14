@@ -23,9 +23,9 @@
   <string name="reportAnError">Report an error: </string>
   <string name="taskASMCount">Max unguided missile count</string>
   <string name="taskATGMCount">Max ATGM count</string>
-  <string name="taskATGMRange">Max ATGM rang</string>
+  <string name="taskATGMRange">Max ATGM range</string>
   <string name="taskBracking">Min bracking time</string>
-  <string name="taskBurstTime">Max burst maxx</string>
+  <string name="taskBurstTime">Max burst mass</string>
   <string name="taskClimb">Min climb time to 5000 m</string>
   <string name="taskClimb1000">Min climb time to 1000 m</string>
   <string name="taskCountOfHelis">Count of helicopters</string>
