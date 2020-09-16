@@ -19,7 +19,7 @@ using Android.Graphics;
 
 namespace AndroidWTInsider
 {
-    [Activity(Label = "WT Insider", Theme = "@style/AppTheme", MainLauncher = true, ScreenOrientation=ScreenOrientation.Landscape, Icon = "@drawable/Icon")]
+    [Activity(Label = "WT Top Charts", Theme = "@style/AppTheme", MainLauncher = true, ScreenOrientation=ScreenOrientation.Landscape, Icon = "@drawable/Icon")]
     public class Startup:AppCompatActivity
     {
         #region Variables

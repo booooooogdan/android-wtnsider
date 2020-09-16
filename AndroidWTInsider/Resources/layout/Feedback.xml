@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editMessage"
                 android:gravity="top"
-                android:minHeight="100dp" />
+                android:minHeight="60dp" />
             <Button
                 android:text="@string/emailSend"
                 android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
                 android:text="@string/rateUs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
+                android:paddingTop="10dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/black" />
             <RatingBar
@@ -53,6 +53,19 @@
                 android:progressTint="#ffffc400"
                 android:progressBackgroundTint="#ffffe082"
                 android:id="@+id/ratingBar"/>
+                                    <TextView
+                android:text="@string/supportPatreon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+                        <Button
+                android:text="@string/patreon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ffff7043"
+                android:id="@+id/buttonPatreon" />
 
         </LinearLayout>
         <LinearLayout
@@ -87,7 +100,7 @@
             </LinearLayout>
             
             <TextView
-                android:text="@string/tryOurApp"
+                android:text="@string/tryOurGame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -111,7 +124,7 @@
 
             </LinearLayout>
                         <TextView
-                android:text="@string/tryOurGame"
+                android:text="@string/tryOurApp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"

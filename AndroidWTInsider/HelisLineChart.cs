@@ -53,9 +53,9 @@ namespace AndroidWTInsider
         {
             MobileAds.Initialize(context);
             var adView = FindViewById<AdView>(Resource.Id.adsHeli);
-            //adView.LoadAd(new AdRequest.Builder().Build());
-            var requestbuilder = new AdRequest.Builder().AddTestDevice("46CCAB8BBCE5B5FFA79C22BEB98029AC");
-            adView.LoadAd(requestbuilder.Build());
+            adView.LoadAd(new AdRequest.Builder().Build());
+            //var requestbuilder = new AdRequest.Builder().AddTestDevice("46CCAB8BBCE5B5FFA79C22BEB98029AC");
+            //adView.LoadAd(requestbuilder.Build());
         }
 
         /// <summary>

@@ -19,8 +19,10 @@
   <string name="nationSweden">Швеция</string>
   <string name="nationUSA">СШП</string>
   <string name="nationUSSR">СССР</string>
+  <string name="patreon">Поддержать</string>
   <string name="rateUs">Оцените нас в Google Play</string>
   <string name="reportAnError">Отчет об ошибке: </string>
+  <string name="supportPatreon">Поддержите нас на Patreon</string>
   <string name="taskASMCount">Макс. количество НАРов</string>
   <string name="taskATGMCount">Макс. количество ПТУР</string>
   <string name="taskATGMRange">Макс. дальность ПТУР</string>

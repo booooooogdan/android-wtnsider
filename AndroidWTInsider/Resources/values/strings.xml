@@ -19,8 +19,10 @@
   <string name="nationSweden">Sweden</string>
   <string name="nationUSA">USA</string>
   <string name="nationUSSR">USSR</string>
+  <string name="patreon">Support</string>
   <string name="rateUs">Rate us in Google Play</string>
   <string name="reportAnError">Report an error: </string>
+  <string name="supportPatreon">Support us on Patreon</string>
   <string name="taskASMCount">Max unguided missile count</string>
   <string name="taskATGMCount">Max ATGM count</string>
   <string name="taskATGMRange">Max ATGM range</string>

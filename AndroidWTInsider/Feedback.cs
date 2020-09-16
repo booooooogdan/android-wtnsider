@@ -19,7 +19,7 @@ namespace AndroidWTInsider
     {
         Context context;
         EditText editMessage;
-        Button buttonSend, buttonReddit, buttonVK;
+        Button buttonSend, buttonReddit, buttonVK, buttonPatreon;
         ImageButton buttonRefWT, buttonRefWoT, buttonRefVersus;
         RatingBar ratingBar;
 
@@ -44,9 +44,10 @@ namespace AndroidWTInsider
             ratingBar.RatingBarChange += RatingBar_RatingBarChange;
             buttonRefWT.Click += ButtonRefWT_Click;
             buttonRefWoT.Click += ButtonRefWoT_Click;
-            buttonRefVersus.Click += ButtonRefVersus_Click; 
-
+            buttonRefVersus.Click += ButtonRefVersus_Click;
+            buttonPatreon.Click += ButtonPatreon_Click;
         }
+
 
         private void ButtonSend_Click(object sender, EventArgs e)
         {
@@ -73,7 +74,14 @@ namespace AndroidWTInsider
         private void RatingBar_RatingBarChange(object sender, RatingBar.RatingBarChangeEventArgs e)
         {
             StartActivity(new Intent(Intent.ActionView, Android.Net.Uri
-                .Parse("https://play.google.com/store/apps/details?id=com.wave.wtinsider")));
+                .Parse("https://play.google.com/store/apps/details?id=com.wtwave.wtinsider")));
+        }
+
+        private void ButtonPatreon_Click(object sender, EventArgs e)
+        {
+            StartActivity(new Intent(Intent.ActionView, Android.Net.Uri
+    .Parse("https://www.patreon.com/wtversus")));
+
         }
 
         private void ButtonRefWT_Click(object sender, EventArgs e)
@@ -118,6 +126,7 @@ namespace AndroidWTInsider
             buttonRefWT = FindViewById<ImageButton>(Resource.Id.buttonRefWT);
             buttonRefWoT = FindViewById<ImageButton>(Resource.Id.buttonRefWoT);
             buttonRefVersus = FindViewById<ImageButton>(Resource.Id.buttonRefVersus);
+            buttonPatreon = FindViewById<Button>(Resource.Id.buttonPatreon);
         }
     }
 }
