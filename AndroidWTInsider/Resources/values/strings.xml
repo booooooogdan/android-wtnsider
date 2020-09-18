@@ -21,6 +21,9 @@
   <string name="nationUSSR">USSR</string>
   <string name="patreon">Support</string>
   <string name="rateUs">Rate us in Google Play</string>
+  <string name="rateTheApp">Rate us in Google Play</string>
+  <string name="rateButtonYes">Rate 5 stars</string>
+  <string name="rateButtonNo">Maybe later</string>
   <string name="reportAnError">Report an error: </string>
   <string name="supportPatreon">Support us on Patreon</string>
   <string name="taskASMCount">Max unguided missile count</string>

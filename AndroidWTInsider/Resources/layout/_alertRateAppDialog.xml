@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="@string/rateTheApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#d60000"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="#ffffffff"
+        android:padding="10dp" />
+
+    <ImageView
+        android:src="@drawable/rateStars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+                android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp" />
+    <Button
+        android:text="@string/rateButtonNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonNo"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp" />
+
+    <Button
+        android:text="@string/rateButtonYes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonYes"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:backgroundTint="#d60000"
+        android:textColor="#ffffffff"
+        android:layout_marginBottom="20dp"/>
+</LinearLayout>

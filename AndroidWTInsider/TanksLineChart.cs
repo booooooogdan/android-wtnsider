@@ -5,6 +5,7 @@ using Android.Content.Res;
 using Android.Gms.Ads;
 using Android.Graphics;
 using Android.OS;
+using Android.Preferences;
 using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
@@ -13,6 +14,7 @@ using Android.Widget;
 using AndroidWTInsider.DataArrays;
 using AndroidWTInsider.Helpers;
 using Com.Syncfusion.Charts;
+using System;
 
 namespace AndroidWTInsider
 {
@@ -24,6 +26,7 @@ namespace AndroidWTInsider
         ChartsTankDataGenerator chartsData;
         Spinner spinner;
         Context context;
+        Android.App.AlertDialog alertDialogAndroid;
 
         /// <summary>
         /// Base Android OnCreate method. Entry point for app
@@ -44,6 +47,7 @@ namespace AndroidWTInsider
             AdsInitialize();
             SpinnerInitialize();
             BottomMenuInitialize();
+            RateApp();
         }
 
         /// <summary>
@@ -132,12 +136,50 @@ namespace AndroidWTInsider
                 case 11:
                     chartsLineInitializer.ChartLineInit(chartView, chartsData, "bottomarmor");
                     spinner.SetSelection(11);
-                    break;               
+                    break;
                 case 12:
                     chartsLineInitializer.ChartLineInit(chartView, chartsData, "firstrideyear");
                     spinner.SetSelection(12);
                     break;
             }
         }
+
+        private void RateApp()
+        {
+            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(context);
+            ISharedPreferencesEditor editor = prefs.Edit();
+
+            var showRateAlert = prefs.GetInt("rateAlert", 1);
+            showRateAlert++;
+            editor.PutInt("rateAlert", showRateAlert);
+            editor.Apply();
+
+            if (showRateAlert == 7 || showRateAlert == 15)
+            CallAlert();
+        }
+
+        private void CallAlert()
+        {
+            var layoutInflater = LayoutInflater.From(this);
+            var mview = layoutInflater.Inflate(Resource.Layout._alertRateAppDialog, null);
+            var alertDialogBuilder = new Android.App.AlertDialog.Builder(this);
+            alertDialogBuilder.SetView(mview);
+            alertDialogAndroid = alertDialogBuilder.Create();
+            alertDialogAndroid.Show();
+            alertDialogAndroid.SetCanceledOnTouchOutside(false);
+            alertDialogAndroid.SetCancelable(false);
+            var rateButtonYes = mview.FindViewById<Button>(Resource.Id.buttonYes);
+            var rateButtonNo = mview.FindViewById<Button>(Resource.Id.buttonNo);
+            rateButtonNo.Click += (s, e) => alertDialogAndroid.Dismiss();
+            rateButtonYes.Click += RateButtonYes_Click;
+        }
+
+        private void RateButtonYes_Click(object sender, EventArgs e)
+        {
+            alertDialogAndroid.Dismiss();
+            StartActivity(new Intent(Intent.ActionView, Android.Net.Uri
+                .Parse("https://play.google.com/store/apps/details?id=com.wtwave.wtinsider")));
+        }
+
     }
 }
